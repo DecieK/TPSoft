@@ -132,7 +132,7 @@ const Modal = ({
 
   const onChang = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGT(event.target.value)
-    
+
   }
 
   const handleSetTT = async (id: number) => {
@@ -201,7 +201,7 @@ const Modal = ({
 
     // console.log("key", e.target.value);
     // console.log("searchkey", searchkey);
-    // e.preventDefault();
+    e.preventDefault();
     // if (searchkey.length > 2) {
     try {
       const params = {
@@ -215,7 +215,7 @@ const Modal = ({
       dodaimang = res.length;
       console.log("dodaimang", dodaimang);
       setBenhnhan(res);
-    
+
       // if(dodaimang == 1){
       benhnhan.map((res) => (
 
