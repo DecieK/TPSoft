@@ -42,18 +42,22 @@ const SearchResults = ({ show, onClose, children }) => {
               145.965
             </div>
             <button className={styles.btn_confirm} onClick={() => setShowModal(true)}>Đặt lịch khám</button>
+            {/* {showModal && <Test
+              onClose={() => setShowModal(false)} key={0} date={undefined} id={0} Ho={""} Ten={""} Hovaten={""} dodai={0} show={undefined} children={undefined} title={undefined} Dienthoai={undefined} Gioitinh={undefined} Diachi={undefined} key1={""} dodaimang={0} gioitinh={undefined}            >
+              Hello from the modal!
+            </Test>} */}
 
           </div>
         </div>
       </div>
-      <Modal onClose={() => setShowModal(false)} show={showModal}></Modal>
+      <Test   onClose={() => setShowModal(false)} show={showModal}></Test>
     </div>
-      
 
 
 
-      // </Fragment>
-    
+
+    // </Fragment>
+
   );
 };
 

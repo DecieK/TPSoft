@@ -11,8 +11,9 @@ type Test = {
   isVisible:boolean;
   onClose : any;
   date : any;
+  show: boolean;
 };
-const Test: React.FC<Test> = ({ isVisible, onClose, date }) => {
+const Test: React.FC<Test> = ({ isVisible, onClose, date, show }) => {
   if (!isVisible) return null;
   const hanleClose = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.id === "nen") onClose();
