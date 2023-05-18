@@ -449,9 +449,12 @@ const Modal = ({
                   type="date"
                 
                   placeholder="DD/MM/YYYY"
-                  // data-inputmask-alias="datetime"
-                  // value={Ngaysinh}
-                  // onChange={(e) => setNgaysinh(e.target.value)}
+                  data-inputmask-alias="date"
+                  data-inputmask-inputformat="dd-mm-yyyy" 
+                  data-mask="" 
+                  im-insert="false"
+                   value={Ngaysinh}
+                  onChange={(e) => setNgaysinh(e.target.value)}
 
                 ></input>
               </div>
