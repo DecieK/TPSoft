@@ -1,15 +1,9 @@
 import fetch from "isomorphic-unfetch";
 
-// export async function AllUser_API() {
-//   const response = await fetch("http://localhost:8080/api/get-all-users");
-//   const data = await response.json();
-//   return data;
-// }
-
 export async function SearchPhone(params: { key: string }): Promise<any> {
   const { key } = params;
   const response = await fetch(
-    // `http://localhost:8080/clinics/search?keyword=${key}`
+
       `http://localhost:8080/api/get-all-benhnhan?keyword=${key}`
 
   );
@@ -19,8 +13,48 @@ export async function SearchPhone(params: { key: string }): Promise<any> {
 export async function SearchId(params: { id: number }): Promise<any> {
   const { id } = params;
   const response = await fetch(
-    // `http://localhost:8080/clinics/search?keyword=${key}`
+
       `http://localhost:8080/api/get-all-benhnhanId?keyword=${id}`
+
+  );
+  const data = await response.json();
+  return data;
+}
+export async function SearchLichkham(params: { key: String }): Promise<any> {
+  const { key } = params;
+  const response = await fetch(
+
+      `http://localhost:8080/api/get-all-lichkhamSDT?keyword=${key}`
+
+  );
+  const data = await response.json();
+  return data;
+}
+export async function SearchBooking(params: { id: number }): Promise<any> {
+  const { id } = params;
+  const response = await fetch(
+
+      `http://localhost:8080/api/get-all-booking?keyword=${id}`
+
+  );
+  const data = await response.json();
+  return data;
+}
+export async function CreateAppointment(params: 
+  { 
+    iddv: number,
+    idbn: number,
+    hoten: string,
+    sdt: string,
+    ngaysinh: string,
+    diachi: string,
+    stt: number,  
+  
+  }): Promise<any> {
+  // const { data } = params;
+  const response = await fetch(
+
+      `http://localhost:8080/api/create-appoinment-booking`
 
   );
   const data = await response.json();

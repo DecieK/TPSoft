@@ -8,13 +8,7 @@ type Props = {
   // Hovaten: string,
 };
 
-const Thongtin = ({
-  key,
-  // Hovaten,
-  id,
-  Ho,
-  Ten,
-}: Props) => {
+const Thongtin = ({  key, id,  Ho,  Ten,}: Props) => {
   return (
     <div className=" h-5 w-80 cursor-pointer pl-1">
       {Ho} {Ten} ({id})
