@@ -231,6 +231,7 @@ const Modal = ({
         idbn: 2,
         hoten: "abc",
         sdt: "0909090923",
+        
         ngaysinh: "12/12/2023",
         diachi: "ct",
         stt: (2 + 1),
