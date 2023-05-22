@@ -37,7 +37,7 @@ type Props = {
 };
 export type thongtinbenhnhan = {
   id: number;
- 
+
   Ho: string;
   Ten: string;
   Dienthoai: string;
@@ -59,7 +59,7 @@ const Modal = ({
   // key1,
   // gioitinh,
 }: Props) => {
- 
+
   interface Benhnhan {
     id: number;
     Ho: string;
@@ -168,14 +168,15 @@ const Modal = ({
       {
         iddv: 1,
         idbn: 2,
-        hoten: name,
-        sdt: sdt,
         ho: ho,
         ten: ten,
+        hoten: name,
         ngaysinh: Ngaysinh,
+        sdt: sdt,
+        gt: gt,
         diachi: diachi,
-        stt: (stt + 1),
         trieuchung: trieuchung,
+        stt: (stt + 1),
         ngaydat: datekham,
 
       });
@@ -191,7 +192,7 @@ const Modal = ({
     };
   };
 
-  
+
   const handlSearchDate = async (date: Date) => {
     setStartDate(date);
     // console.log("day", day)
@@ -249,7 +250,7 @@ const Modal = ({
     console.log("ten", ten);
 
 
-    
+
 
   };
 
@@ -367,7 +368,7 @@ const Modal = ({
           setIdbn(res.id),
           // ChangeTypeDate(Ngaysinh)
           //  setBirthday(res.Ngaysinh.getFullYear() + "/"+ Ngaysinh.getMonth()+"/"+Ngaysinh.getDate()),
-          console.log("asd",res.Ngaysinh.getFullYear())
+          // console.log("asd",res.Ngaysinh.getFullYear())
           
         )
         );
@@ -381,7 +382,7 @@ const Modal = ({
         setTrieuchung("")
         console.log("ádasd", diachi)
       }
-      
+
 
       // console.log("ngay",startDate.getDay+ startDate.getMonth + startDate.getFullYear)
       // console.log("ngay",startDate.getMonth()+1)
@@ -405,289 +406,289 @@ const Modal = ({
   const modalContent = show ? (
     <StyledModalOverlay>
 
-    <StyledModal className="  w-[500px]  rounded-lg ">
-      <StyledModalHeader className=" bg-blue-300  ">
-        <div className="flex text-xl p-2">
-          <span className=" text-center uppercase w-full">
-            Phòng khám chuyên khoa nhi
-            <br />
-            bs. trần cao thái
-          </span>
+      <StyledModal className="  w-[500px]  rounded-lg ">
+        <StyledModalHeader className=" bg-blue-300  ">
+          <div className="flex text-xl p-2">
+            <span className=" text-center uppercase w-full">
+              Phòng khám chuyên khoa nhi
+              <br />
+              bs. trần cao thái
+            </span>
 
-          <button
-            // href="#"
-            className="rounded-full text-center h-7 w-7 bg-gray-300"
-            onClick={handleCloseClick}
-          >
-            x
-          </button>
-        </div>
-      </StyledModalHeader>
-      {title && (
-        <StyledModal>
-          {title}
-          {/* <div></div> */}
-        </StyledModal>
-      )}
-      <StyledModalBody className="bg-gray-300 ">
-        <div className="modal ">
-          <div className="modal-body-tren bg-white m-3 p-4 rounded-md">
-            <div className="grid grid-cols-5 pl-4">
-              <div className="col-span-1">
-                <p className="">Điện thoại</p>
-              </div>
-              <div className="col-span-4 pl-4">
-                <input
-                  className=" border-slate-500 font-bold border-dotted w-full border-b-2"
-                  type="text"
-                  placeholder="NHẬP CHÍNH XÁC SỐ ĐIỆN THOẠI"
-                  // onChange={e => setSearchkey(e.target.value)}
-                  onChange={handlechange}
-                  // ref={inputRef}
-                ></input>
-                <div className=" a">
-                  {benhnhan.length != 1
-                    ? benhnhan.map((thongtinbenhnhans) => (
-                      <div
-                        key={thongtinbenhnhans.id}
-                        // number a ={ thongtinbenhnhans.id}
-                        className="aâ h-5 w-80 cursor-pointer pl-1"
-                        onClick={(_e) => handleSetTT(thongtinbenhnhans.id)}
-                      // onChange={handlechange}
-                      >
-                        {thongtinbenhnhans.Ho} {thongtinbenhnhans.Ten} (
-                        {thongtinbenhnhans.id})
-                      </div>
-                    ))
-                    : null}
-
-
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-5 py-4">
-              <div className="col-span-1 my-auto text-right">
-                <p className="datlich_text_desktop">Họ tên </p>
-              </div>
-              <div className="col-span-4 pl-7">
-                <input
-                  className="Ho w-full  border-slate-500 border-dotted font-bold border-b-2 "
-                  placeholder="NHẬP CHÍNH XÁC HỌ TÊN"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                ></input>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-5 ">
-              <div className="col-span-1 my-auto text-right">
-                <p className="datlich_text_desktop">Ngày sinh </p>
-              </div>
-              <div className="col-span-4 pl-7">
-                <input
-                  id="ngaysinh"
-                  className="font-bold form-control ngaysinh_edit txt_date w-full border-slate-500 border-dotted  border-b-2"
-                  data-date-format="dd-mm-yy"
-                  type="date"
-                
-                  placeholder="DD/MM/YYYY"
-                  data-inputmask-alias="date"
-                  data-inputmask-inputformat="dd-mm-yyyy" 
-                  data-mask="" 
-                  im-insert="false"
-                   value={Ngaysinh}
-                  onChange={(e) => setNgaysinh(e.target.value)}
-
-                ></input>
-              </div>
-            </div>
-            <div className="grid grid-cols-5 py-2">
-              <div className="col-span-1 pl-5">
-                <p className="datlich_text_desktop text-right">Giới tính</p>
-              </div>
-              <div className="col-span-4 mx-10 ">
-                <input onChange={onChang} type="radio" value="Nam" name='gt' checked={gt === "Nam"} /> Nam
-                <input className="ml-9" onChange={onChang} type="radio" value="Nu" name='gt' checked={gt === "Nu"} /> Nữ
-              </div>
-              {/* </Radio.Group> */}
-            </div>
-
-            <div className="grid grid-cols-5 ">
-              <div className="col-span-1 my-auto text-right ">
-                <p className="datlich_text_desktop text-right">Địa chỉ</p>
-              </div>
-              <div className="col-span-4 pl-7  ">
-                <input
-                  type="text"
-                  className="w-full border-slate-500 border-dotted  border-b-2"
-                  placeholder=""
-                  value={diachi}
-                  onChange={(e) => setDiachi(e.target.value)}
-
-                ></input>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-5 py-4">
-              <div className="col-span-1 my-auto text-right">
-                <p className="datlich_text_desktop">Triệu chứng</p>
-              </div>
-              <div className="col-span-4 pl-7 ">
-                <input
-                  type="text"
-                  className=" border-slate-500 border-dotted w-full border-b-2"
-                  placeholder=""
-                  value={trieuchung}
-                  onChange={(e) => setTrieuchung(e.target.value)}
-
-                ></input>
-              </div>
-            </div>
+            <button
+              // href="#"
+              className="rounded-full text-center h-7 w-7 bg-gray-300"
+              onClick={handleCloseClick}
+            >
+              x
+            </button>
           </div>
-          <div className="modal-body-tren bg-white m-3 p-4 rounded-md">
-            <div className="grid grid-cols-5">
-              <div className="col-span-1 text-right">
-                <p className="datlich_text_desktop    ">Ngày khám</p>
+        </StyledModalHeader>
+        {title && (
+          <StyledModal>
+            {title}
+            {/* <div></div> */}
+          </StyledModal>
+        )}
+        <StyledModalBody className="bg-gray-300 ">
+          <div className="modal ">
+            <div className="modal-body-tren bg-white m-3 p-4 rounded-md">
+              <div className="grid grid-cols-5 pl-4">
+                <div className="col-span-1">
+                  <p className="">Điện thoại</p>
+                </div>
+                <div className="col-span-4 pl-4">
+                  <input
+                    className=" border-slate-500 font-bold border-dotted w-full border-b-2"
+                    type="text"
+                    placeholder="NHẬP CHÍNH XÁC SỐ ĐIỆN THOẠI"
+                    // onChange={e => setSearchkey(e.target.value)}
+                    onChange={handlechange}
+                  // ref={inputRef}
+                  ></input>
+                  <div className=" a">
+                    {benhnhan.length != 1
+                      ? benhnhan.map((thongtinbenhnhans) => (
+                        <div
+                          key={thongtinbenhnhans.id}
+                          // number a ={ thongtinbenhnhans.id}
+                          className="aâ h-5 w-80 cursor-pointer pl-1"
+                          onClick={(_e) => handleSetTT(thongtinbenhnhans.id)}
+                        // onChange={handlechange}
+                        >
+                          {thongtinbenhnhans.Ho} {thongtinbenhnhans.Ten} (
+                          {thongtinbenhnhans.id})
+                        </div>
+                      ))
+                      : null}
+
+
+                  </div>
+                </div>
               </div>
-              <div className="col-span-4 pl-7 ">
-                <div
 
-                  className=" border-slate-500 border-dotted font-bold border-b-2"
-                // onChange={handlSearchDate}
-                >
-                  <DatePicker
-                    className=""
-                    // Dateformat="yyyy/MM/DD"
+              <div className="grid grid-cols-5 py-4">
+                <div className="col-span-1 my-auto text-right">
+                  <p className="datlich_text_desktop">Họ tên </p>
+                </div>
+                <div className="col-span-4 pl-7">
+                  <input
+                    className="Ho w-full  border-slate-500 border-dotted font-bold border-b-2 "
+                    placeholder="NHẬP CHÍNH XÁC HỌ TÊN"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  ></input>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-5 ">
+                <div className="col-span-1 my-auto text-right">
+                  <p className="datlich_text_desktop">Ngày sinh </p>
+                </div>
+                <div className="col-span-4 pl-7">
+                  <input
+                    id="ngaysinh"
+                    className="font-bold form-control ngaysinh_edit txt_date w-full border-slate-500 border-dotted  border-b-2"
+                    data-date-format="dd-mm-yy"
                     type="date"
-                    selected={startDate}
-                    // selected={ setNgaykham(startDate.getFullYear()+"-"+(startDate.getMonth()+1)+"-"+startDate.getDate())
-                    // }
 
-                    // onChange={handlSearchDate(date: React.SetStateAction<Date>)}
-                    // onChange={(date: Date) => handlSearchDate((date))}
-                    onChange={(date: Date) => handlSearchDate((date))}
+                    placeholder="DD/MM/YYYY"
+                    data-inputmask-alias="date"
+                    data-inputmask-inputformat="dd-mm-yyyy"
+                    data-mask=""
+                    im-insert="false"
+                    value={Ngaysinh}
+                    onChange={(e) => setNgaysinh(e.target.value)}
 
-                  // onClick={handlSearchDate}
-                  // onChange={(e: { target: { value: React.SetStateAction<Date>; }; }) => handleSetFormat(e.target.value)}
-                  // onChange={(date) => setStartDate(date)}
+                  ></input>
+                </div>
+              </div>
+              <div className="grid grid-cols-5 py-2">
+                <div className="col-span-1 pl-5">
+                  <p className="datlich_text_desktop text-right">Giới tính</p>
+                </div>
+                <div className="col-span-4 mx-10 ">
+                  <input onChange={onChang} type="radio" value="Nam" name='gt' checked={gt === "Nam"} /> Nam
+                  <input className="ml-9" onChange={onChang} type="radio" value="Nu" name='gt' checked={gt === "Nu"} /> Nữ
+                </div>
+                {/* </Radio.Group> */}
+              </div>
 
-                  />
+              <div className="grid grid-cols-5 ">
+                <div className="col-span-1 my-auto text-right ">
+                  <p className="datlich_text_desktop text-right">Địa chỉ</p>
+                </div>
+                <div className="col-span-4 pl-7  ">
+                  <input
+                    type="text"
+                    className="w-full border-slate-500 border-dotted  border-b-2"
+                    placeholder=""
+                    value={diachi}
+                    onChange={(e) => setDiachi(e.target.value)}
+
+                  ></input>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-5 py-4">
+                <div className="col-span-1 my-auto text-right">
+                  <p className="datlich_text_desktop">Triệu chứng</p>
+                </div>
+                <div className="col-span-4 pl-7 ">
+                  <input
+                    type="text"
+                    className=" border-slate-500 border-dotted w-full border-b-2"
+                    placeholder=""
+                    value={trieuchung}
+                    onChange={(e) => setTrieuchung(e.target.value)}
+
+                  ></input>
                 </div>
               </div>
             </div>
+            <div className="modal-body-tren bg-white m-3 p-4 rounded-md">
+              <div className="grid grid-cols-5">
+                <div className="col-span-1 text-right">
+                  <p className="datlich_text_desktop    ">Ngày khám</p>
+                </div>
+                <div className="col-span-4 pl-7 ">
+                  <div
 
-            <div className="khunggio grid grid-cols-5 0 py-1">
-              <div className="col-span-1 text-right ">
-                <p className="datlich_text_desktop text-red-600">
-                  Vui lòng chọn buổi
-                </p>
+                    className=" border-slate-500 border-dotted font-bold border-b-2"
+                  // onChange={handlSearchDate}
+                  >
+                    <DatePicker
+                      className=""
+                      // Dateformat="yyyy/MM/DD"
+                      type="date"
+                      selected={startDate}
+                      // selected={ setNgaykham(startDate.getFullYear()+"-"+(startDate.getMonth()+1)+"-"+startDate.getDate())
+                      // }
+
+                      // onChange={handlSearchDate(date: React.SetStateAction<Date>)}
+                      // onChange={(date: Date) => handlSearchDate((date))}
+                      onChange={(date: Date) => handlSearchDate((date))}
+
+                    // onClick={handlSearchDate}
+                    // onChange={(e: { target: { value: React.SetStateAction<Date>; }; }) => handleSetFormat(e.target.value)}
+                    // onChange={(date) => setStartDate(date)}
+
+                    />
+                  </div>
+                </div>
               </div>
-              {/* <option className="btn">dfghj</option>
+
+              <div className="khunggio grid grid-cols-5 0 py-1">
+                <div className="col-span-1 text-right ">
+                  <p className="datlich_text_desktop text-red-600">
+                    Vui lòng chọn buổi
+                  </p>
+                </div>
+                {/* <option className="btn">dfghj</option>
               <option>dfghj</option>
               <option>dfghj</option> */}
 
 
-              <div>
-                <div className="lichkham">
-                  {lichkham && lichkham.length > 0
-                    ? (
-                      lichkham.map((lichkhams, index) => {
+                <div>
+                  <div className="lichkham">
+                    {lichkham && lichkham.length > 0
+                      ? (
+                        lichkham.map((lichkhams, index) => {
 
-                        if (lichkhams.sang == "ONL") {
-                          // setBuoikham(lichkhams.mabuoisa)
-                          return (
-                            <div className="col-span-4 pl-7 "
-                              key={index}>
-                              <button className="bg-slate-200 rounded-lg h-9 w-80 focus:bg-blue-400">
-                                <p className="btn-khunggio flex w-full " 
-                                // onClick={handleTest}
-                                >
-                                  <p className="h-9 w-[60px] text-left pl-3 pt-1 ">{lichkhams.mabuoisa}</p>
-                                  <p className="w-[190px] h-9 pt-1 text-left">
-                                    07:00 - 16:00
+                          if (lichkhams.sang == "ONL") {
+                            // setBuoikham(lichkhams.mabuoisa)
+                            return (
+                              <div className="col-span-4 pl-7 "
+                                key={index}>
+                                <button className="bg-slate-200 rounded-lg h-9 w-80 focus:bg-blue-400">
+                                  <p className="btn-khunggio flex w-full "
+                                  // onClick={handleTest}
+                                  >
+                                    <p className="h-9 w-[60px] text-left pl-3 pt-1 ">{lichkhams.mabuoisa}</p>
+                                    <p className="w-[190px] h-9 pt-1 text-left">
+                                      07:00 - 16:00
+                                    </p>
+                                    <p className="bg-gray-600 rounded-r-lg pt-1 h-9 w-[70px]">
+                                      {lichkhams.slsaHientai}/{lichkhams.slsa}
+                                    </p>
                                   </p>
-                                  <p className="bg-gray-600 rounded-r-lg pt-1 h-9 w-[70px]">
-                                    {lichkhams.slsaHientai}/{lichkhams.slsa}
+                                </button>
+
+                              </div>
+                            );
+
+                          }
+                        })
+
+                      )
+
+                      : null}
+                  </div>
+                  <div className="lichkham">
+                    {lichkham && lichkham.length > 0
+                      ? (
+                        lichkham.map((lichkhams, index) => {
+
+                          if (lichkhams.trua == "ONL") {
+                            // setBuoikham("Trưa")
+                            return (
+                              <div className="col-span-4 pl-7 p-2"
+                                key={index}>
+                                <button className="bg-slate-200 rounded-lg h-9 w-80 focus:bg-blue-400">
+                                  <p className="btn_khunggio flex  w-full  " >
+                                    <p className="h-9 w-[60px] text-left pl-3 pt-1 ">{lichkhams.mabuoitr}</p>
+                                    <p className="w-[190px] h-9 pt-1 text-left ">
+                                      07:00 - 16:00
+                                    </p>
+                                    <p className="bg-gray-600 rounded-r-lg pt-1 h-9 w-[70px]">
+                                      {lichkhams.sltrHientai}/{lichkhams.sltr}
+                                    </p>
                                   </p>
-                                </p>
-                              </button>
+                                </button>
+                              </div>
+                            );
 
-                            </div>
-                          );
+                          }
+                        })
+                      )
+                      : null}
+                  </div>
+                  <div className="lichkham">
+                    {lichkham && lichkham.length > 0
+                      ? (
+                        lichkham.map((lichkhams, index) => {
 
-                        }
-                      })
+                          if (lichkhams.chieu == "ONL") {
+                            // setBuoikham("Chiều")
+                            return (
+                              <div className="col-span-4 pl-7"
+                                key={index}>
+                                <button className="bg-slate-200 rounded-lg h-9 w-80 focus:bg-blue-400 " onClick={() => setBuoikham("Sáng")}>
+                                  <p className="btn_khunggio flex  w-full ">
+                                    <p className="h-9 w-[60px] text-left pl-3 pt-1">{lichkhams.mabuoich}</p>
+                                    <p className="w-[190px] h-9 pt-1 text-left">
+                                      07:00 - 16:00
+                                    </p>
+                                    <button className="bg-gray-600 rounded-r-lg pt-1 h-9 w-[70px] center">
+                                      {lichkhams.slchHientai}/{lichkhams.slch}
+                                    </button>
+                                  </p>
+                                </button>
+                              </div>
+                            );
 
-                    )
+                          }
+                        })
 
-                    : null}
+                      )
+
+                      : null}
+                  </div>
+                  {/* <a onClick={handleConfirmBooking}>click</a> */}
+
                 </div>
-                <div className="lichkham">
-                  {lichkham && lichkham.length > 0
-                    ? (
-                      lichkham.map((lichkhams, index) => {
 
-                        if (lichkhams.trua == "ONL") {
-                          // setBuoikham("Trưa")
-                          return (
-                            <div className="col-span-4 pl-7 p-2"
-                              key={index}>
-                              <button className="bg-slate-200 rounded-lg h-9 w-80 focus:bg-blue-400">
-                                <p className="btn_khunggio flex  w-full  " >
-                                  <p className="h-9 w-[60px] text-left pl-3 pt-1 ">{lichkhams.mabuoitr}</p>
-                                  <p className="w-[190px] h-9 pt-1 text-left ">
-                                    07:00 - 16:00
-                                  </p>
-                                  <p className="bg-gray-600 rounded-r-lg pt-1 h-9 w-[70px]">
-                                    {lichkhams.sltrHientai}/{lichkhams.sltr}
-                                  </p>
-                                </p>
-                              </button>
-                            </div>
-                          );
-
-                        }
-                      })
-                    )
-                    : null}
-                </div>
-                <div className="lichkham">
-                  {lichkham && lichkham.length > 0
-                    ? (
-                      lichkham.map((lichkhams, index) => {
-
-                        if (lichkhams.chieu == "ONL") {
-                          // setBuoikham("Chiều")
-                          return (
-                            <div className="col-span-4 pl-7"
-                              key={index}>
-                              <button className="bg-slate-200 rounded-lg h-9 w-80 focus:bg-blue-400 " onClick={()=>setBuoikham("Sáng")}>
-                                <p className="btn_khunggio flex  w-full ">
-                                  <p className="h-9 w-[60px] text-left pl-3 pt-1">{lichkhams.mabuoich}</p>
-                                  <p className="w-[190px] h-9 pt-1 text-left">
-                                    07:00 - 16:00
-                                  </p>
-                                  <button className="bg-gray-600 rounded-r-lg pt-1 h-9 w-[70px] center">
-                                    {lichkhams.slchHientai}/{lichkhams.slch}
-                                  </button>
-                                </p>
-                              </button>
-                            </div>
-                          );
-
-                        }
-                      })
-
-                    )
-
-                    : null}
-                </div>
-                {/* <a onClick={handleConfirmBooking}>click</a> */}
-
-              </div>
-                      
-              {/* <div className="col-span-4 pl-[117px]">
+                {/* <div className="col-span-4 pl-[117px]">
                 <div className="bg-slate-200 rounded-lg h-9 w-80 ">
                   <button className="btn_khunggio flex  w-full ">
                     <p className="h-9 w-[60px] text-left pl-3 pt-1">
@@ -702,19 +703,19 @@ const Modal = ({
                   </button>
                 </div>
               </div> */}
+              </div>
+            </div>
+            <div className=" text-right m-3 pb-2">
+              <button className="bg-blue-400 w-20 rounded-lg h-9 "
+                onClick={handleCreateBooking}
+              >
+                <p className="">Đặt lịch</p>
+              </button>
             </div>
           </div>
-          <div className=" text-right m-3 pb-2">
-            <button className="bg-blue-400 w-20 rounded-lg h-9 "
-              onClick={handleCreateBooking}
-            >
-              <p className="">Đặt lịch</p>
-            </button>
-          </div>
-        </div>
-      </StyledModalBody>
-    </StyledModal>
-  </StyledModalOverlay>
+        </StyledModalBody>
+      </StyledModal>
+    </StyledModalOverlay>
   ) : null;
 
   if (isBrowser) {

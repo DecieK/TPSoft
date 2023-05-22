@@ -66,9 +66,10 @@ export async function CreateAppointment(params: {
   idbn: number;
   ho: string;
   ten: string;
-  hoten: string;
-  sdt: string;
+  hoten: string; 
   ngaysinh: Date;
+  sdt: string;
+  gt: string;
   diachi: string;
   trieuchung: string;
   stt: number;
