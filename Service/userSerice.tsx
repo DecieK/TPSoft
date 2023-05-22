@@ -64,11 +64,15 @@ export async function SearchBooking(params: { id: number }): Promise<any> {
 export async function CreateAppointment(params: {
   iddv: number;
   idbn: number;
+  ho: string;
+  ten: string;
   hoten: string;
   sdt: string;
   ngaysinh: Date;
   diachi: string;
+  trieuchung: string;
   stt: number;
+  ngaydat: Date;
 }): Promise<any> {
   const response = await fetch(`http://localhost:8080/api/create-appoinment-booking`, {
     method: 'POST',
@@ -80,3 +84,5 @@ export async function CreateAppointment(params: {
   const data = await response.json();
   return data;
 }
+
+// idbn, iddv, ho, ten, hoten, sdt, ngaysinh, diachi, trieuchung, stt, ngaydat

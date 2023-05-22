@@ -117,12 +117,19 @@ const Modal = ({
 
   const [name, setName] = useState("");
   const [Ngaysinh, setNgaysinh] = useState(new Date());
+  const [datekham, setDatekham] = useState(new Date());
+
   const [gt, setGT] = useState("");
   const [diachi, setDiachi] = useState("");
   const [trieuchung, setTrieuchung] = useState("");
   const [ngaykham, setNgaykham] = useState(String);
   const [buoikham, setBuoikham] = useState(String);
   const [stt, setStt] = useState(Number);
+  const [ho, setHo] = useState("");
+  const [ten, setTen] = useState("");
+
+  const [birthday, setBirthday] = useState("");
+
   // const [idbn, setIdbn] = useState("");
 
 
@@ -163,9 +170,13 @@ const Modal = ({
         idbn: 2,
         hoten: name,
         sdt: sdt,
+        ho: ho,
+        ten: ten,
         ngaysinh: Ngaysinh,
         diachi: diachi,
         stt: (stt + 1),
+        trieuchung: trieuchung,
+        ngaydat: datekham,
 
       });
 
@@ -186,8 +197,8 @@ const Modal = ({
     // console.log("day", day)
     // setDay(date)
     console.log("date", date);
+    setDatekham(date)
     // console.log("day", day)
-    console.log("startDate", startDate)
 
     // console.log("a", date.getDate())
     // console.log("ă", (date.getMonth()+1))
@@ -233,6 +244,13 @@ const Modal = ({
     console.log("trieuchung", trieuchung);
     console.log("ngaykham", ngaykham);
     console.log("buoi", sang, trua, chieu);
+    console.log("datekham", datekham);
+    console.log("ho", ho);
+    console.log("ten", ten);
+
+
+    
+
   };
 
   const onChang = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -267,6 +285,9 @@ const Modal = ({
         setSdt(res1.Dienthoai),
         setGT(res1.Gioitinh),
         setName(res1.Ho + " " + res1.Ten),
+        setHo(res1.Ho),
+        setTen(res1.Ten),
+
 
         setNgaysinh(res1.Ngaysinh),
         setDiachi(res1.Diachi),
@@ -287,6 +308,26 @@ const Modal = ({
     }
 
   };
+  // const ChangeTypeDate = async (Ngaysinh: Date) => {
+  //   // setStartDate(date);
+  //   // console.log("day", day)
+  //   // setDay(date)
+  //   // console.log("date", date);
+  //   // console.log("day", day)
+  //   // console.log("startDate", startDate)
+
+  //   // console.log("a", date.getDate())
+  //   // console.log("ă", (date.getMonth()+1))
+  //   // console.log("ớ", date.getFullYear())
+  //   const key = Ngaysinh.getFullYear() + "-" + (Ngaysinh.getMonth() + 1) + "-" + Ngaysinh.getDate()
+  //   // console.log("key", key)
+  //   setBirthday(key);
+  //   console.log("key", key)
+
+
+
+  // };
+
 
   const handlechange = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -294,7 +335,7 @@ const Modal = ({
     setSearchkey(e.target.value);
     setName("")
     setGT("")
-    setNgaysinh("")
+    // setNgaysinh("")
     setDiachi("")
     setTrieuchung("")
 
@@ -317,15 +358,17 @@ const Modal = ({
           setGT(res.Gioitinh),
 
           setName(res.Ho + " " + res.Ten),
+          setHo(res.Ho),
+          setTen(res.Ten),
 
           setNgaysinh(res.Ngaysinh),
           setDiachi(res.Diachi),
           setTrieuchung(res.Trieuchung),
-          setIdbn(res.id)
-
-          // console.log("ádasd", Ngaysinh)
-
-
+          setIdbn(res.id),
+          // ChangeTypeDate(Ngaysinh)
+          //  setBirthday(res.Ngaysinh.getFullYear() + "/"+ Ngaysinh.getMonth()+"/"+Ngaysinh.getDate()),
+          console.log("asd",res.Ngaysinh.getFullYear())
+          
         )
         );
       }
