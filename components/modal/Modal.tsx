@@ -189,10 +189,6 @@ const Modal = ({
   }, []);
 
 
-<<<<<<< HEAD
-  const onChang = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setGT(event.target.value)
-=======
   const handleTest = () => {
     // document.getElementsByClassName("btn_khunggio").style.color = 'blue';
 
@@ -309,7 +305,6 @@ const Modal = ({
     e.preventDefault();
 
     setGT(e.target.value)
->>>>>>> ab8270368111e1c99d35a65b102b7f2fe76eac48
 
   }
 
