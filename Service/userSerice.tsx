@@ -64,8 +64,8 @@ export async function SearchBooking(params: { id: number }): Promise<any> {
 export async function CreateAppointment(params: {
   iddv: number;
   idbn: number;
-  ho: string;
-  ten: string;
+  // ho: string;
+  // ten: string;
   hoten: string; 
   ngaysinh: Date;
   sdt: string;
@@ -74,6 +74,7 @@ export async function CreateAppointment(params: {
   trieuchung: string;
   stt: number;
   ngaydat: Date;
+  buoikham: string;
 }): Promise<any> {
   const response = await fetch(`http://localhost:8080/api/create-appoinment-booking`, {
     method: 'POST',

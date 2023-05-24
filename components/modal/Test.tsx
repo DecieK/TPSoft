@@ -146,7 +146,7 @@ const Modal = ({
   const [slch, setSlch] = useState(Number);
 
   const [isBrowser, setIsBrowser] = useState(false);
-  console.log(buoikham)
+  // console.log(buoikham)
   useEffect(() => {
     setIsBrowser(true);
   }, []);
@@ -160,7 +160,20 @@ const Modal = ({
     console.log("diachi", diachi);
     console.log("trieuchung", trieuchung);
     console.log("ngaykham", ngaykham);
+    console.log("buoikham", buoikham);
+
     console.log("buoi", sang, trua, chieu);
+    if( buoikham == "Sáng"){
+      setStt(slsa)
+    }
+    else if( buoikham == "Trưa"){
+      setStt(sltr)
+    }
+    else
+    {
+      setStt(slch)
+    }
+    console.log("stt", stt)
 
 
     // let date = new Date(this.state.birthdy).getTime();
@@ -170,10 +183,10 @@ const Modal = ({
 
     let res = await CreateAppointment(
       {
-        iddv: 1,
+        iddv: 57,
         idbn: 2,
-        ho: ho,
-        ten: ten,
+        // ho: ho,
+        // ten: ten,
         hoten: name,
         ngaysinh: Ngaysinh,
         sdt: sdt,
@@ -182,6 +195,7 @@ const Modal = ({
         trieuchung: trieuchung,
         stt: (stt + 1),
         ngaydat: datekham,
+        buoikham: buoikham,
 
       });
 
@@ -196,6 +210,63 @@ const Modal = ({
     };
   };
 
+  const handleSetSTT = async ()=>{
+    try {
+
+      const params = {
+        key: ngaykham,
+      };
+      console.log("searchdate", params);
+      const response = await SearchLichkham(params);
+      const res2: Lichkham[] = response.lichkhams;
+      console.log("check api searchdate: ", response);
+      console.log("length", res2.length);
+      setLichkham(res2);
+      console.log(res2)
+
+      res2.map((res2) => (
+
+        setSang(res2.sang),
+        setTrua(res2.trua),
+        setChieu(res2.chieu),
+        setSlsa(res2.slsaHientai),
+        setSltr(res2.sltrHientai),
+        setSlch(res2.slchHientai),
+        console.log("slsa", slsa),
+        console.log("sltr", sltr),
+        console.log("slch", slch)
+
+
+        // {res2.sang == "ONL"? setBuoikham("Sáng"):null}
+
+      )
+      );
+      
+   
+      if(buoikham == "Sáng"){
+        // setBuoikham("Sáng")
+        setStt(slsa)
+
+        console.log("slsa", slsa)
+      }
+      if(buoikham == "Trưa"){
+        setStt(sltr)
+        // setBuoikham("Trưa")
+        console.log("sltr", sltr)
+      }
+      if(buoikham == "Chiều"){
+        setStt(slch)
+        // setBuoikham("Chiều")
+        console.log("slch", slch)
+      }
+      console.log("stt", stt)
+      console.log("buoikham", buoikham)
+
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const handlSearchDate = async (date: Date) => {
     setStartDate(date);
@@ -232,9 +303,9 @@ const Modal = ({
         setSang(res2.sang),
         setTrua(res2.trua),
         setChieu(res2.chieu),
-        setSlsa(res2.slsa),
-        setSltr(res2.sltr),
-        setSlch(res2.slch)
+        setSlsa(res2.slsaHientai),
+        setSltr(res2.sltrHientai),
+        setSlch(res2.slchHientai)
       )
       );
 
@@ -253,6 +324,9 @@ const Modal = ({
     console.log("datekham", datekham);
     console.log("ho", ho);
     console.log("ten", ten);
+    console.log("sa", slsa);
+    console.log("tr", sltr);
+    console.log("ch", slch);
 
 
 
@@ -314,54 +388,7 @@ const Modal = ({
     }
 
   };
-  const handletargetName = async (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setName(e.target.value);
-    // console.log(name);
-   const  HovaTen = (e.target.value).split(" ")
-    console.log("ádasd",HovaTen)
-    setHo(HovaTen[0])
-    console.log("length", HovaTen.length)
 
-    // HovaTen.map((res) => (
-    //   setSdt(res.Dienthoai),
-    //   setGT(res.Gioitinh),
-
-    //   setName(res.Ho + " " + res.Ten),
-    //   setHo(res.Ho),
-    //   setTen(res.Ten),
-
-    //   setNgaysinh(res.Ngaysinh),
-    //   setDiachi(res.Diachi),
-    //   setTrieuchung(res.Trieuchung),
-    //   setIdbn(res.id)
-    //   // ChangeTypeDate(Ngaysinh)
-    //   //  setBirthday(res.Ngaysinh.getFullYear() + "/"+ Ngaysinh.getMonth()+"/"+Ngaysinh.getDate()),
-    //   // console.log("asd",res.Ngaysinh.getFullYear())
-      
-    // )
-    // )
-    // i: Number
-    {
-      HovaTen.length ==3
-      ? setTen(HovaTen[1]+" "+HovaTen[2])
-      : null;
-    }
-
-    // let temp: any;
-    // for (let i = 1; i <= HovaTen.length; i++) {
-    //     temp= (HovaTen[i]);
-    //     // console.log("i", i);
-
-    //     // console.log("temp", HovaTen[i])
-    //   };
-    //   setTen(ten +" "+temp);
-
-
-    console.log("ho", ho)
-    console.log("ten", ten)
-
-  };
 
 
 
@@ -514,10 +541,10 @@ const Modal = ({
                     placeholder="NHẬP CHÍNH XÁC HỌ TÊN"
                     type="text"
                     value={name}
-                    // onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => setName(e.target.value)}
                     // value={ho+" "+ten}
                     // onChange={(e) => handletargetName}
-                    onChange={handletargetName}
+                    // onChange={handletargetName}
 
 
                   //   {
@@ -640,7 +667,7 @@ const Modal = ({
               <option>dfghj</option> */}
 
 
-                <div>
+                <div >
                   <div className="lichkham">
                     {lichkham && lichkham.length > 0
                       ? (
@@ -650,12 +677,17 @@ const Modal = ({
                             // setBuoikham(lichkhams.mabuoisa)
                             return (
                               <div className="col-span-4 pl-7 "
-                                key={index}>
-                                <button className="bg-slate-200 rounded-lg h-9 w-80 focus:bg-blue-400">
+                                key={index}
+                                onClick={() => setBuoikham("Sáng")}
+
+                                
+                                >
+                                  
+                                <button className="bg-slate-200 rounded-lg h-9 w-80 focus:bg-blue-400" onClick={() => setStt(lichkhams.slsaHientai)} >
                                   <p className="btn-khunggio flex w-full "
                                   // onClick={handleTest}
                                   >
-                                    <p className="h-9 w-[60px] text-left pl-3 pt-1 ">{lichkhams.mabuoisa}</p>
+                                    <p className="h-9 w-[60px] text-left pl-3 pt-1">{lichkhams.mabuoisa}</p>
                                     <p className="w-[190px] h-9 pt-1 text-left">
                                       07:00 - 16:00
                                     </p>
@@ -684,8 +716,10 @@ const Modal = ({
                             // setBuoikham("Trưa")
                             return (
                               <div className="col-span-4 pl-7 p-2"
-                                key={index}>
-                                <button className="bg-slate-200 rounded-lg h-9 w-80 focus:bg-blue-400">
+                                key={index}
+                                onClick={() => setBuoikham("Trưa")}
+                                >
+                                <button className="bg-slate-200 rounded-lg h-9 w-80 focus:bg-blue-400" onClick={() => setStt(lichkhams.sltrHientai)}>
                                   <p className="btn_khunggio flex  w-full  " >
                                     <p className="h-9 w-[60px] text-left pl-3 pt-1 ">{lichkhams.mabuoitr}</p>
                                     <p className="w-[190px] h-9 pt-1 text-left ">
@@ -713,8 +747,10 @@ const Modal = ({
                             // setBuoikham("Chiều")
                             return (
                               <div className="col-span-4 pl-7"
-                                key={index}>
-                                <button className="bg-slate-200 rounded-lg h-9 w-80 focus:bg-blue-400 " onClick={() => setBuoikham("Sáng")}>
+                                key={index}
+                                onClick={() => setBuoikham("Chiều")}
+                                >
+                                <button className="bg-slate-200 rounded-lg h-9 w-80 focus:bg-blue-400 " onClick={() => setStt(lichkhams.slchHientai)}>
                                   <p className="btn_khunggio flex  w-full ">
                                     <p className="h-9 w-[60px] text-left pl-3 pt-1">{lichkhams.mabuoich}</p>
                                     <p className="w-[190px] h-9 pt-1 text-left">
