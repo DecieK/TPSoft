@@ -103,6 +103,10 @@ const Modal = ({
     chovuottr: number;
     chovuotch: number;
   }
+  interface HovaTen {
+    ho: string;
+    ten: String;
+  }
   const [searchkey, setSearchkey] = useState("");
   const [benhnhan, setBenhnhan] = useState<Benhnhan[]>([]);
   const [benhnhan1, setBenhnhan1] = useState<Benhnhan1[]>([]);
@@ -126,7 +130,7 @@ const Modal = ({
   const [buoikham, setBuoikham] = useState(String);
   const [stt, setStt] = useState(Number);
   const [ho, setHo] = useState("");
-  const [ten, setTen] = useState("");
+  const [ten, setTen] = useState(String);
 
   const [birthday, setBirthday] = useState("");
 
@@ -310,6 +314,7 @@ const Modal = ({
     }
 
   };
+<<<<<<< HEAD
   const hanldtarget = async (e: ChangeEvent<HTMLInputElement>) => {
     // setHo(e.target.value)
     
@@ -330,13 +335,67 @@ const Modal = ({
 
 
 
+=======
+  const handletargetName = async (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setName(e.target.value);
+    // console.log(name);
+   const  HovaTen = (e.target.value).split(" ")
+    console.log("ádasd",HovaTen)
+    setHo(HovaTen[0])
+    console.log("length", HovaTen.length)
+
+    // HovaTen.map((res) => (
+    //   setSdt(res.Dienthoai),
+    //   setGT(res.Gioitinh),
+
+    //   setName(res.Ho + " " + res.Ten),
+    //   setHo(res.Ho),
+    //   setTen(res.Ten),
+
+    //   setNgaysinh(res.Ngaysinh),
+    //   setDiachi(res.Diachi),
+    //   setTrieuchung(res.Trieuchung),
+    //   setIdbn(res.id)
+    //   // ChangeTypeDate(Ngaysinh)
+    //   //  setBirthday(res.Ngaysinh.getFullYear() + "/"+ Ngaysinh.getMonth()+"/"+Ngaysinh.getDate()),
+    //   // console.log("asd",res.Ngaysinh.getFullYear())
+      
+    // )
+    // )
+    // i: Number
+    {
+      HovaTen.length ==3
+      ? setTen(HovaTen[1]+" "+HovaTen[2])
+      : null;
+    }
+
+    // let temp: any;
+    // for (let i = 1; i <= HovaTen.length; i++) {
+    //     temp= (HovaTen[i]);
+    //     // console.log("i", i);
+
+    //     // console.log("temp", HovaTen[i])
+    //   };
+    //   setTen(ten +" "+temp);
+
+
+    console.log("ho", ho)
+    console.log("ten", ten)
+
+
+
+
+>>>>>>> 97e9cea1eaf53dc0b1babdd54db38c4bdd96b5b1
   };
 
 
   const handlechange = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
+    
 
     setSearchkey(e.target.value);
+    console.log("sdt", searchkey)
     setName("")
     setGT("")
     // setNgaysinh("")
@@ -478,9 +537,23 @@ const Modal = ({
                   <input
                     className="Ho w-full  border-slate-500 border-dotted font-bold border-b-2 "
                     placeholder="NHẬP CHÍNH XÁC HỌ TÊN"
+                    type="text"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  ></input>
+                    // onChange={(e) => setName(e.target.value)}
+                    // value={ho+" "+ten}
+                    // onChange={(e) => handletargetName}
+                    onChange={handletargetName}
+
+
+                  //   {
+                  //     ...benhnhan.map((thongtinbenhnhans) => (
+                  //      setHo(thongtinbenhnhans.Ho),
+                  //      setTen(thongtinbenhnhans.Ten)
+                  //  )) 
+                  //  }
+                  >
+                    
+                  </input>
                 </div>
               </div>
 
