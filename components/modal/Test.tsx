@@ -195,6 +195,7 @@ const Modal = ({
 
   const handlSearchDate = async (date: Date) => {
     setStartDate(date);
+
     // console.log("day", day)
     // setDay(date)
     console.log("date", date);
@@ -309,25 +310,27 @@ const Modal = ({
     }
 
   };
-  // const ChangeTypeDate = async (Ngaysinh: Date) => {
-  //   // setStartDate(date);
-  //   // console.log("day", day)
-  //   // setDay(date)
-  //   // console.log("date", date);
-  //   // console.log("day", day)
-  //   // console.log("startDate", startDate)
+  const hanldtarget = async (e: ChangeEvent<HTMLInputElement>) => {
+    // setHo(e.target.value)
+    
+    // setStartDate(date);
+    // console.log("day", day)
+    // setDay(date)
+    // console.log("date", date);
+    // console.log("day", day)
+    // console.log("startDate", startDate)
 
-  //   // console.log("a", date.getDate())
-  //   // console.log("ă", (date.getMonth()+1))
-  //   // console.log("ớ", date.getFullYear())
-  //   const key = Ngaysinh.getFullYear() + "-" + (Ngaysinh.getMonth() + 1) + "-" + Ngaysinh.getDate()
-  //   // console.log("key", key)
-  //   setBirthday(key);
-  //   console.log("key", key)
+    // console.log("a", date.getDate())
+    // console.log("ă", (date.getMonth()+1))
+    // console.log("ớ", date.getFullYear())
+    // const key = Ngaysinh.getFullYear() + "-" + (Ngaysinh.getMonth() + 1) + "-" + Ngaysinh.getDate()
+    // console.log("key", key)
+    // setBirthday(key);
+    // console.log("key", key)
 
 
 
-  // };
+  };
 
 
   const handlechange = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -365,7 +368,7 @@ const Modal = ({
           setNgaysinh(res.Ngaysinh),
           setDiachi(res.Diachi),
           setTrieuchung(res.Trieuchung),
-          setIdbn(res.id),
+          setIdbn(res.id)
           // ChangeTypeDate(Ngaysinh)
           //  setBirthday(res.Ngaysinh.getFullYear() + "/"+ Ngaysinh.getMonth()+"/"+Ngaysinh.getDate()),
           // console.log("asd",res.Ngaysinh.getFullYear())
