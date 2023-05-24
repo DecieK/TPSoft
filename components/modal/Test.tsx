@@ -314,28 +314,6 @@ const Modal = ({
     }
 
   };
-<<<<<<< HEAD
-  const hanldtarget = async (e: ChangeEvent<HTMLInputElement>) => {
-    // setHo(e.target.value)
-    
-    // setStartDate(date);
-    // console.log("day", day)
-    // setDay(date)
-    // console.log("date", date);
-    // console.log("day", day)
-    // console.log("startDate", startDate)
-
-    // console.log("a", date.getDate())
-    // console.log("ă", (date.getMonth()+1))
-    // console.log("ớ", date.getFullYear())
-    // const key = Ngaysinh.getFullYear() + "-" + (Ngaysinh.getMonth() + 1) + "-" + Ngaysinh.getDate()
-    // console.log("key", key)
-    // setBirthday(key);
-    // console.log("key", key)
-
-
-
-=======
   const handletargetName = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setName(e.target.value);
@@ -383,11 +361,8 @@ const Modal = ({
     console.log("ho", ho)
     console.log("ten", ten)
 
-
-
-
->>>>>>> 97e9cea1eaf53dc0b1babdd54db38c4bdd96b5b1
   };
+
 
 
   const handlechange = async (e: ChangeEvent<HTMLInputElement>) => {
