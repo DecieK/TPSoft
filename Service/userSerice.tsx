@@ -75,6 +75,7 @@ export async function CreateAppointment(params: {
   stt: number;
   ngaydat: Date;
   buoikham: string;
+  ngaykham: string;
 }): Promise<any> {
   const response = await fetch(`http://localhost:8080/api/create-appoinment-booking`, {
     method: 'POST',

@@ -153,13 +153,14 @@ const Modal = ({
 
   const handleCreateBooking = async () => {
 
-    console.log("sdt", name);
+    console.log("sdt", sdt);
     console.log("hoten", name);
     console.log("ngaysinh", Ngaysinh);
     console.log("gt", gt);
     console.log("diachi", diachi);
     console.log("trieuchung", trieuchung);
     console.log("ngaykham", ngaykham);
+    console.log("ngaydat", datekham);
     console.log("buoikham", buoikham);
 
     console.log("buoi", sang, trua, chieu);
@@ -193,8 +194,9 @@ const Modal = ({
         gt: gt,
         diachi: diachi,
         trieuchung: trieuchung,
-        stt: (stt + 1),
-        ngaydat: datekham,
+        stt: stt+1,
+        ngaykham: ngaykham,
+        ngaydat: new Date(),
         buoikham: buoikham,
 
       });
@@ -243,24 +245,24 @@ const Modal = ({
       );
       
    
-      if(buoikham == "Sáng"){
-        // setBuoikham("Sáng")
-        setStt(slsa)
+      // if(buoikham == "Sáng"){
+      //   // setBuoikham("Sáng")
+      //   setStt(slsa)
 
-        console.log("slsa", slsa)
-      }
-      if(buoikham == "Trưa"){
-        setStt(sltr)
-        // setBuoikham("Trưa")
-        console.log("sltr", sltr)
-      }
-      if(buoikham == "Chiều"){
-        setStt(slch)
-        // setBuoikham("Chiều")
-        console.log("slch", slch)
-      }
-      console.log("stt", stt)
-      console.log("buoikham", buoikham)
+      //   console.log("slsa", slsa)
+      // }
+      // if(buoikham == "Trưa"){
+      //   setStt(sltr)
+      //   // setBuoikham("Trưa")
+      //   console.log("sltr", sltr)
+      // }
+      // if(buoikham == "Chiều"){
+      //   setStt(slch)
+      //   // setBuoikham("Chiều")
+      //   console.log("slch", slch)
+      // }
+      // console.log("stt", stt)
+      // console.log("buoikham", buoikham)
 
 
     } catch (error) {
