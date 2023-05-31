@@ -20,6 +20,16 @@ export async function SearchId(params: { id: number }): Promise<any> {
   const data = await response.json();
   return data;
 }
+export async function SearchHosodvID(params: { iddv: number }): Promise<any> {
+  const { iddv } = params;
+  const response = await fetch(
+
+      `http://localhost:8080/api/get-all-hosodv?keyword=${iddv}`
+
+  );
+  const data = await response.json();
+  return data;
+}
 export async function SearchLichkham(params: { key: String }): Promise<any> {
   const { key } = params;
   const response = await fetch(

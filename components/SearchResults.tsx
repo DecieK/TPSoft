@@ -11,6 +11,7 @@ const SearchResults = ({ show, onClose, children }) => {
 
   const [showModal, setShowModal] = useState(false);
   const [isOpen, setState] = useState(false);
+  const [iddv, setIddv] = useState(57);
 
   function handleClick() {
     setState(!isOpen);
@@ -50,7 +51,7 @@ const SearchResults = ({ show, onClose, children }) => {
           </div>
         </div>
       </div>
-      <Test   onClose={() => setShowModal(false)} show={showModal}></Test>
+      <Test  iddv={iddv} onClose={() => setShowModal(false)} show={showModal}></Test>
     </div>
 
 
