@@ -34,6 +34,7 @@ type Props = {
   key1: string;
   dodaimang: number;
   gioitinh: String;
+  iddv: number;
 };
 export type thongtinbenhnhan = {
   id: number;
@@ -52,7 +53,7 @@ const Modal = ({
   onClose,
   title,
   // key,
-  // id,
+  iddv,
   // Ho,
   // Ten,
   dodaimang,
@@ -107,10 +108,18 @@ const Modal = ({
     ho: string;
     ten: String;
   }
+    interface HoSoDonVi {
+    iddv: number;
+    tendv: string;
+    tenbs: string;
+   
+  }
   const [searchkey, setSearchkey] = useState("");
   const [benhnhan, setBenhnhan] = useState<Benhnhan[]>([]);
   const [benhnhan1, setBenhnhan1] = useState<Benhnhan1[]>([]);
   const [lichkham, setLichkham] = useState<Lichkham[]>([]);
+    const [hosodv, setHosodv] = useState<HoSoDonVi[]>([]);
+
 
 
   const [startDate, setStartDate] = useState(new Date());
@@ -131,6 +140,9 @@ const Modal = ({
   const [stt, setStt] = useState(Number);
   const [ho, setHo] = useState("");
   const [ten, setTen] = useState(String);
+  const [tendv, setTendv] = useState("Phòng khám chuyên khoa nhi");
+  const [tenbs, setTenbs] = useState("Bs. trần cao thái");
+
 
   const [birthday, setBirthday] = useState("");
   const [message, setMessage] = useState("");
@@ -437,7 +449,7 @@ const Modal = ({
 
   const handlechange = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    
+    console.log("iddv", iddv);
 
     setSearchkey(e.target.value);
     console.log("sdt", searchkey)
@@ -511,15 +523,16 @@ const Modal = ({
   };
 
   const modalContent = show ? (
-    <StyledModalOverlay>
 
+    <StyledModalOverlay>
+        {}
       <StyledModal className="  w-[500px]  rounded-lg ">
         <StyledModalHeader className=" bg-blue-300  ">
           <div className="flex text-xl p-2">
             <span className=" text-center uppercase w-full">
-              Phòng khám chuyên khoa nhi
+              {tendv}
               <br />
-              bs. trần cao thái
+              {tenbs}
             </span>
 
             <button
