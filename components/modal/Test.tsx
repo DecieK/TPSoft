@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, ChangeEvent } from "react";
+import React, { useEffect, useState, useRef, ChangeEvent, BaseSyntheticEvent } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 import DatePicker from "react-datepicker";
@@ -133,6 +133,8 @@ const Modal = ({
   const [ten, setTen] = useState(String);
 
   const [birthday, setBirthday] = useState("");
+  const [message, setMessage] = useState("");
+
 
   // const [idbn, setIdbn] = useState("");
 
@@ -145,13 +147,38 @@ const Modal = ({
   const [sltr, setSltr] = useState(Number);
   const [slch, setSlch] = useState(Number);
 
+  const [loading, setLoading] = useState(false);
+
+
   const [isBrowser, setIsBrowser] = useState(false);
   // console.log(buoikham)
   useEffect(() => {
     setIsBrowser(true);
   }, []);
 
-  const handleCreateBooking = async () => {
+  // const sendMessage = async (e: BaseSyntheticEvent) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   // setError(false);
+  //   // setSuccess(false);
+  //   const res = await fetch('/api/sendMessage', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     // body: JSON.stringify({ phone: phone, message: message }),
+  //   });
+  //   const apiResponse = await res.json();
+
+  // //   if (apiResponse.success) {
+  // //     setSuccess(true);
+  // //   } else {
+  // //     setError(true);
+  // //   }
+  // //   setLoading(false);
+  // };
+
+  const handleCreateBooking = async (e: BaseSyntheticEvent) => {
 
     console.log("sdt", sdt);
     console.log("hoten", name);
@@ -162,6 +189,7 @@ const Modal = ({
     console.log("ngaykham", ngaykham);
     console.log("ngaydat", datekham);
     console.log("buoikham", buoikham);
+    setMessage("Xác nhận đặt lịch khám tại phòng khám ABC ngày: "+ ngaykham + " STT: "+(stt+1))
 
     console.log("buoi", sang, trua, chieu);
     if( buoikham == "Sáng"){
@@ -201,15 +229,28 @@ const Modal = ({
 
       });
 
-    if (res && res.errCode === 0) {
+    // if (res && res.errCode === 0) {
 
-      // handleCloseClick();
-      alert("TC")
-    } else {
-      // format.error("Booking a new appointment error !");
-      // }
-      alert("error")
-    };
+    //   // handleCloseClick();
+    //   alert("TC")
+    // } else {
+    //   // format.error("Booking a new appointment error !");
+    //   // }
+    //   alert("error")
+    // };
+    setLoading(true);
+    // setError(false);
+    // setSuccess(false);
+    const res1 = await fetch('/api/sendMessage', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ phone: sdt, message: message }),
+      // body: JSON.stringify({ message: message }),
+
+    });
+    const apiResponse = await res1.json();
   };
 
   const handleSetSTT = async ()=>{
@@ -797,6 +838,7 @@ const Modal = ({
             <div className=" text-right m-3 pb-2">
               <button className="bg-blue-400 w-20 rounded-lg h-9 "
                 onClick={handleCreateBooking}
+                // onSubmit={sendMessage}
               >
                 <p className="">Đặt lịch</p>
               </button>
