@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 // import { Radio } from '@nextui-org/react';
 
 
-import { Props } from "react-modal";
+// import { Props } from "react-modal";
 
 
 import { CreateAppointment, SearchId, SearchLichkham, SearchPhone } from "@/Service/userSerice";
@@ -108,17 +108,17 @@ const Modal = ({
     ho: string;
     ten: String;
   }
-    interface HoSoDonVi {
+  interface HoSoDonVi {
     iddv: number;
     tendv: string;
     tenbs: string;
-   
+
   }
   const [searchkey, setSearchkey] = useState("");
   const [benhnhan, setBenhnhan] = useState<Benhnhan[]>([]);
   const [benhnhan1, setBenhnhan1] = useState<Benhnhan1[]>([]);
   const [lichkham, setLichkham] = useState<Lichkham[]>([]);
-    const [hosodv, setHosodv] = useState<HoSoDonVi[]>([]);
+  const [hosodv, setHosodv] = useState<HoSoDonVi[]>([]);
 
 
 
@@ -142,6 +142,7 @@ const Modal = ({
   const [ten, setTen] = useState(String);
   const [tendv, setTendv] = useState("Phòng khám chuyên khoa nhi");
   const [tenbs, setTenbs] = useState("Bs. trần cao thái");
+  const [ngaykhamfm, setNgaykhamfm] = useState(String);
 
 
   const [birthday, setBirthday] = useState("");
@@ -189,6 +190,11 @@ const Modal = ({
   // //   }
   // //   setLoading(false);
   // };
+  //   const formatDateFn = (date:  Date) => {
+  //      const selectedDate = new Date(date)
+  //     //  return selectedDate.getDate() + "/"+ parseInt(selectedDate.getMonth()+1) +"/"+ selectedDate.getFullYear();
+
+  // } 
 
   const handleCreateBooking = async (e: BaseSyntheticEvent) => {
 
@@ -201,144 +207,133 @@ const Modal = ({
     console.log("ngaykham", ngaykham);
     console.log("ngaydat", datekham);
     console.log("buoikham", buoikham);
-    setMessage("Xác nhận đặt lịch khám tại phòng khám ABC ngày: "+ ngaykham + " STT: "+(stt+1))
+    console.log("tendv", tendv);
+    console.log("ngaykhamfm", ngaykhamfm);
+    // setMessage("Xác nhận đặt lịch khám tại " + tendv + " ngày: " + ngaykhamfm + " buổi: " + buoikham + ", STT: " + (stt + 1))
+    // console.log("mess0",message)
+
+
+    // setSdt("+84166655650")
+    // console.log("sdt84", sdt)
+
+    // let sdt_temp =sdt.split("+84");
+    // console.log("sdt_temp", "0"+sdt_temp[1])
 
     console.log("buoi", sang, trua, chieu);
-    if( buoikham == "Sáng"){
+    if (buoikham == "Sáng") {
       setStt(slsa)
     }
-    else if( buoikham == "Trưa"){
+    else if (buoikham == "Trưa") {
       setStt(sltr)
     }
-    else
-    {
+    else {
       setStt(slch)
     }
     console.log("stt", stt)
-
-
-    // let date = new Date(this.state.birthdy).getTime();
-    // let timeString = this.buildTimeBooking(this.props.dataTime);
-    // let doctorname = this.buildDoctorName(this.props.dataTime);
-    // let currentNumber = this.state.currentNumber;
-
+    let temp=("Xác nhận đặt lịch khám tại " + tendv + " ngày: " + ngaykhamfm + " buổi: " + buoikham + ", STT: " + (stt + 1));
+    console.log("mess1",temp)
     let res = await CreateAppointment(
       {
         iddv: 57,
         idbn: 2,
-        // ho: ho,
-        // ten: ten,
         hoten: name,
         ngaysinh: Ngaysinh,
         sdt: sdt,
         gt: gt,
         diachi: diachi,
         trieuchung: trieuchung,
-        stt: stt+1,
+        stt: stt + 1,
         ngaykham: ngaykham,
         ngaydat: new Date(),
         buoikham: buoikham,
 
       });
 
-    // if (res && res.errCode === 0) {
+    if (res && res.errCode === 0) {
+      // setMessage("Xác nhận đặt lịch khám tại " + tendv + " ngày: " + ngaykhamfm + " buổi: " + buoikham + ", STT: " + (stt + 1));
+      // console.log("mess2",message)
 
-    //   // handleCloseClick();
-    //   alert("TC")
-    // } else {
-    //   // format.error("Booking a new appointment error !");
-    //   // }
-    //   alert("error")
-    // };
-    setLoading(true);
-    // setError(false);
-    // setSuccess(false);
-    const res1 = await fetch('/api/sendMessage', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ phone: sdt, message: message }),
-      // body: JSON.stringify({ message: message }),
 
-    });
-    const apiResponse = await res1.json();
+      alert("Đặt lịch thành công")
+      setLoading(true);
+      // setError(false);
+      // setSuccess(false);
+     
+     
+      // const res1 = await fetch('/api/sendMessage', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+        
+      //   body: JSON.stringify({ message: temp }),
+
+      // });
+      // const apiResponse = await res1.json();
+
+
+
+      // handleCloseClick();
+    } else {
+      // format.error("Booking a new appointment error !");
+      // }
+      alert("Đặt lịch không thành công")
+    };
+
   };
 
-  const handleSetSTT = async ()=>{
-    try {
+  // const handleSetSTT = async () => {
+  //   try {
 
-      const params = {
-        key: ngaykham,
-      };
-      console.log("searchdate", params);
-      const response = await SearchLichkham(params);
-      const res2: Lichkham[] = response.lichkhams;
-      console.log("check api searchdate: ", response);
-      console.log("length", res2.length);
-      setLichkham(res2);
-      console.log(res2)
+  //     const params = {
+  //       key: ngaykham,
+  //     };
+  //     console.log("searchdate", params);
+  //     const response = await SearchLichkham(params);
+  //     const res2: Lichkham[] = response.lichkhams;
+  //     console.log("check api searchdate: ", response);
+  //     console.log("length", res2.length);
+  //     setLichkham(res2);
+  //     console.log(res2)
 
-      res2.map((res2) => (
+  //     res2.map((res2) => (
 
-        setSang(res2.sang),
-        setTrua(res2.trua),
-        setChieu(res2.chieu),
-        setSlsa(res2.slsaHientai),
-        setSltr(res2.sltrHientai),
-        setSlch(res2.slchHientai),
-        console.log("slsa", slsa),
-        console.log("sltr", sltr),
-        console.log("slch", slch)
-
-
-        // {res2.sang == "ONL"? setBuoikham("Sáng"):null}
-
-      )
-      );
-      
-   
-      // if(buoikham == "Sáng"){
-      //   // setBuoikham("Sáng")
-      //   setStt(slsa)
-
-      //   console.log("slsa", slsa)
-      // }
-      // if(buoikham == "Trưa"){
-      //   setStt(sltr)
-      //   // setBuoikham("Trưa")
-      //   console.log("sltr", sltr)
-      // }
-      // if(buoikham == "Chiều"){
-      //   setStt(slch)
-      //   // setBuoikham("Chiều")
-      //   console.log("slch", slch)
-      // }
-      // console.log("stt", stt)
-      // console.log("buoikham", buoikham)
+  //       setSang(res2.sang),
+  //       setTrua(res2.trua),
+  //       setChieu(res2.chieu),
+  //       setSlsa(res2.slsaHientai),
+  //       setSltr(res2.sltrHientai),
+  //       setSlch(res2.slchHientai),
+  //       console.log("slsa", slsa),
+  //       console.log("sltr", sltr),
+  //       console.log("slch", slch)
 
 
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  //     )
+  //     );
+
+
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   const handlSearchDate = async (date: Date) => {
+
     setStartDate(date);
 
-    // console.log("day", day)
-    // setDay(date)
-    console.log("date", date);
+    console.log("date", startDate);
     setDatekham(date)
-    // console.log("day", day)
 
-    // console.log("a", date.getDate())
-    // console.log("ă", (date.getMonth()+1))
-    // console.log("ớ", date.getFullYear())
     const key = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+    const keyfm = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear()
+
     // console.log("key", key)
     setNgaykham(key);
+    setNgaykhamfm(keyfm);
+
     console.log("key", key)
+    // setStartDate(key );
 
 
     try {
@@ -368,24 +363,6 @@ const Modal = ({
     } catch (error) {
       console.log(error);
     }
-    console.log("sdt", sdt);
-    console.log("hoten", name);
-    console.log("ngaysinh", Ngaysinh);
-    console.log("gt", gt);
-    console.log("diachi", diachi);
-    console.log("trieuchung", trieuchung);
-    console.log("ngaykham", ngaykham);
-    console.log("buoi", sang, trua, chieu);
-    console.log("datekham", datekham);
-    console.log("ho", ho);
-    console.log("ten", ten);
-    console.log("sa", slsa);
-    console.log("tr", sltr);
-    console.log("ch", slch);
-
-
-
-
   };
 
   const onChang = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -485,10 +462,6 @@ const Modal = ({
           setDiachi(res.Diachi),
           setTrieuchung(res.Trieuchung),
           setIdbn(res.id)
-          // ChangeTypeDate(Ngaysinh)
-          //  setBirthday(res.Ngaysinh.getFullYear() + "/"+ Ngaysinh.getMonth()+"/"+Ngaysinh.getDate()),
-          // console.log("asd",res.Ngaysinh.getFullYear())
-          
         )
         );
       }
@@ -501,31 +474,32 @@ const Modal = ({
         setTrieuchung("")
         console.log("ádasd", diachi)
       }
-
-
-      // console.log("ngay",startDate.getDay+ startDate.getMonth + startDate.getFullYear)
-      // console.log("ngay",startDate.getMonth()+1)
-      // // console.log("ngay",startDate.getDay)
-
-      // // console.log("ngaykham", date.format(startDate))
-
-      // setNgaykham(startDate.getFullYear()+"-"+(startDate.getMonth()+1)+"-"+startDate.getDate())
-      // console.log("ngaykhamdaformat", ngaykham)
     } catch (error) {
       console.log(error);
+
     }
 
   };
 
-  const handleCloseClick = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCloseClick = (e: ChangeEvent<HTMLInputElement>) => {
+
     e.preventDefault();
     onClose();
+    setName("")
+    setGT("")
+    setNgaysinh(new Date)
+    // startDate(TodayInstance)
+    setDatekham(new Date(DatePicker))
+    // setNgaykham(new Date)
+    setDiachi("")
+    setTrieuchung("")
+    console.log("ádasd", diachi)
   };
 
   const modalContent = show ? (
 
     <StyledModalOverlay>
-        {}
+      { }
       <StyledModal className="  w-[500px]  rounded-lg ">
         <StyledModalHeader className=" bg-blue-300  ">
           <div className="flex text-xl p-2">
@@ -562,7 +536,6 @@ const Modal = ({
                     className=" border-slate-500 font-bold border-dotted w-full border-b-2"
                     type="text"
                     placeholder="NHẬP CHÍNH XÁC SỐ ĐIỆN THOẠI"
-                    // onChange={e => setSearchkey(e.target.value)}
                     onChange={handlechange}
                   // ref={inputRef}
                   ></input>
@@ -598,19 +571,8 @@ const Modal = ({
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    // value={ho+" "+ten}
-                    // onChange={(e) => handletargetName}
-                    // onChange={handletargetName}
-
-
-                  //   {
-                  //     ...benhnhan.map((thongtinbenhnhans) => (
-                  //      setHo(thongtinbenhnhans.Ho),
-                  //      setTen(thongtinbenhnhans.Ten)
-                  //  )) 
-                  //  }
                   >
-                    
+
                   </input>
                 </div>
               </div>
@@ -689,24 +651,13 @@ const Modal = ({
                   <div
 
                     className=" border-slate-500 border-dotted font-bold border-b-2"
-                  // onChange={handlSearchDate}
                   >
                     <DatePicker
                       className=""
-                      // Dateformat="yyyy/MM/DD"
-                      type="date"
+                      type="datetime"
                       selected={startDate}
-                      // selected={ setNgaykham(startDate.getFullYear()+"-"+(startDate.getMonth()+1)+"-"+startDate.getDate())
-                      // }
-
-                      // onChange={handlSearchDate(date: React.SetStateAction<Date>)}
-                      // onChange={(date: Date) => handlSearchDate((date))}
                       onChange={(date: Date) => handlSearchDate((date))}
-
-                    // onClick={handlSearchDate}
-                    // onChange={(e: { target: { value: React.SetStateAction<Date>; }; }) => handleSetFormat(e.target.value)}
-                    // onChange={(date) => setStartDate(date)}
-
+                      dateFormat="dd/MM/yyyy"
                     />
                   </div>
                 </div>
@@ -736,9 +687,9 @@ const Modal = ({
                                 key={index}
                                 onClick={() => setBuoikham("Sáng")}
 
-                                
-                                >
-                                  
+
+                              >
+
                                 <button className="bg-slate-200 rounded-lg h-9 w-80 focus:bg-blue-400" onClick={() => setStt(lichkhams.slsaHientai)} >
                                   <p className="btn-khunggio flex w-full "
                                   // onClick={handleTest}
@@ -774,7 +725,7 @@ const Modal = ({
                               <div className="col-span-4 pl-7 p-2"
                                 key={index}
                                 onClick={() => setBuoikham("Trưa")}
-                                >
+                              >
                                 <button className="bg-slate-200 rounded-lg h-9 w-80 focus:bg-blue-400" onClick={() => setStt(lichkhams.sltrHientai)}>
                                   <p className="btn_khunggio flex  w-full  " >
                                     <p className="h-9 w-[60px] text-left pl-3 pt-1 ">{lichkhams.mabuoitr}</p>
@@ -805,7 +756,7 @@ const Modal = ({
                               <div className="col-span-4 pl-7"
                                 key={index}
                                 onClick={() => setBuoikham("Chiều")}
-                                >
+                              >
                                 <button className="bg-slate-200 rounded-lg h-9 w-80 focus:bg-blue-400 " onClick={() => setStt(lichkhams.slchHientai)}>
                                   <p className="btn_khunggio flex  w-full ">
                                     <p className="h-9 w-[60px] text-left pl-3 pt-1">{lichkhams.mabuoich}</p>
@@ -851,7 +802,7 @@ const Modal = ({
             <div className=" text-right m-3 pb-2">
               <button className="bg-blue-400 w-20 rounded-lg h-9 "
                 onClick={handleCreateBooking}
-                // onSubmit={sendMessage}
+              // onSubmit={sendMessage}
               >
                 <p className="">Đặt lịch</p>
               </button>
