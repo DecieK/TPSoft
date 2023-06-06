@@ -429,6 +429,7 @@ const Modal = ({
     console.log("iddv", iddv);
 
     setSearchkey(e.target.value);
+    setSdt(e.target.value),
     console.log("sdt", searchkey)
     setName("")
     setGT("")
@@ -440,6 +441,7 @@ const Modal = ({
       const params = {
         key: e.target.value,
       };
+
       console.log("search", params);
       const response = await SearchPhone(params);
       const res: Benhnhan[] = response.thongtinbenhnhans;
