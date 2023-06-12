@@ -10,6 +10,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 
 import { CreateAppointment, SearchId, SearchLichkham, SearchPhone } from "@/Service/userSerice";
+import { REACT_LOADABLE_MANIFEST } from "next/dist/shared/lib/constants";
 
 
 
@@ -130,6 +131,8 @@ const Modal = ({
 
   const [name, setName] = useState("");
   const [Ngaysinh, setNgaysinh] = useState(new Date());
+  const [Ngaysinh1, setNgaysinh1] = useState("");
+
   const [datekham, setDatekham] = useState(new Date());
 
   const [gt, setGT] = useState("");
@@ -230,8 +233,8 @@ const Modal = ({
       setStt(slch)
     }
     console.log("stt", stt)
-    let temp=("Xác nhận đặt lịch khám tại " + tendv + " ngày: " + ngaykhamfm + " buổi: " + buoikham + ", STT: " + (stt + 1));
-    console.log("mess1",temp)
+    let temp = ("Xác nhận đặt lịch khám tại " + tendv + " ngày: " + ngaykhamfm + " buổi: " + buoikham + ", STT: " + (stt + 1));
+    console.log("mess1", temp)
     let res = await CreateAppointment(
       {
         iddv: 57,
@@ -258,14 +261,14 @@ const Modal = ({
       setLoading(true);
       // setError(false);
       // setSuccess(false);
-     
-     
+
+
       // const res1 = await fetch('/api/sendMessage', {
       //   method: 'POST',
       //   headers: {
       //     'Content-Type': 'application/json',
       //   },
-        
+
       //   body: JSON.stringify({ message: temp }),
 
       // });
@@ -273,11 +276,12 @@ const Modal = ({
 
 
 
-      // handleCloseClick();
+      handleCloseClick();
     } else {
       // format.error("Booking a new appointment error !");
       // }
       alert("Đặt lịch không thành công")
+      handleCloseClick();
     };
 
   };
@@ -402,6 +406,9 @@ const Modal = ({
 
 
         setNgaysinh(res1.Ngaysinh),
+        setNgaysinh1(Ngaysinh.toString()),
+        // const abc = ngaysinh.toISOString();
+        console.log("ẻ", Ngaysinh.toString()),
         setDiachi(res1.Diachi),
         setTrieuchung(res1.Trieuchung),
         setIdbn(res1.id),
@@ -430,7 +437,7 @@ const Modal = ({
 
     setSearchkey(e.target.value);
     setSdt(e.target.value),
-    console.log("sdt", searchkey)
+      console.log("sdt", searchkey)
     setName("")
     setGT("")
     // setNgaysinh("")
@@ -483,19 +490,22 @@ const Modal = ({
 
   };
 
-  const handleCloseClick = (e: ChangeEvent<HTMLInputElement>) => {
+  // const handleCloseClick = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleCloseClick = () => {
 
-    e.preventDefault();
+    window.location.reload()
+    // e.preventDefault();
     onClose();
     setName("")
     setGT("")
     setNgaysinh(new Date)
     // startDate(TodayInstance)
-    setDatekham(new Date(DatePicker))
+    // setDatekham(new Date(DatePicker))
     // setNgaykham(new Date)
     setDiachi("")
     setTrieuchung("")
     console.log("ádasd", diachi)
+
   };
 
   const modalContent = show ? (
@@ -586,10 +596,10 @@ const Modal = ({
                 <div className="col-span-4 pl-7">
                   <input
                     id="ngaysinh"
-                    className="font-bold form-control ngaysinh_edit txt_date w-full border-slate-500 border-dotted  border-b-2"
-                    data-date-format="dd-mm-yy"
+                    className=" font-bold form-control ngaysinh_edit txt_date w-full border-slate-500 border-dotted  border-b-2"
+                    data-date-format="dd-MM-yy"
                     type="date"
-
+                    // clearIcon={null}
                     placeholder="DD/MM/YYYY"
                     data-inputmask-alias="date"
                     data-inputmask-inputformat="dd-mm-yyyy"
@@ -599,6 +609,7 @@ const Modal = ({
                     onChange={(e) => setNgaysinh(e.target.value)}
 
                   ></input>
+
                 </div>
               </div>
               <div className="grid grid-cols-5 py-2">
@@ -656,7 +667,7 @@ const Modal = ({
                   >
                     <DatePicker
                       className=""
-                      type="datetime"
+                      // type="datetime"
                       selected={startDate}
                       onChange={(date: Date) => handlSearchDate((date))}
                       dateFormat="dd/MM/yyyy"
