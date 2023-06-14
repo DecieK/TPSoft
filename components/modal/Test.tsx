@@ -57,7 +57,7 @@ const Modal = ({
   iddv,
   // Ho,
   // Ten,
-  dodaimang,
+  // dodaimang,
   // key1,
   // gioitinh,
 }: Props) => {
@@ -154,7 +154,7 @@ const Modal = ({
 
   // const [idbn, setIdbn] = useState("");
 
-
+  const [dodaimang, setDodaimang] = useState(Number);
 
   const [sang, setSang] = useState("");
   const [trua, setTrua] = useState("");
@@ -377,7 +377,7 @@ const Modal = ({
   }
 
   const handleSetTT = async (id: number) => {
-
+    setDodaimang(1)
     setName("")
     setGT("")
 
@@ -427,6 +427,9 @@ const Modal = ({
     }
 
   };
+  // const handleOnchangeDate = async (e: ChangeEvent<HTMLInputElement>) => {
+  //  setNgaysinh(e.target.value);
+  // }
 
 
 
@@ -434,7 +437,7 @@ const Modal = ({
   const handlechange = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     console.log("iddv", iddv);
-
+    // let dodaimang: any;
     setSearchkey(e.target.value);
     setSdt(e.target.value),
       console.log("sdt", searchkey)
@@ -454,7 +457,8 @@ const Modal = ({
       const res: Benhnhan[] = response.thongtinbenhnhans;
       console.log("check api search: ", response);
       console.log("length", res.length);
-      dodaimang = res.length;
+      setDodaimang(res.length)
+      // dodaimang = res.length;
       console.log("dodaimang", dodaimang);
       setBenhnhan(res);
 
@@ -474,6 +478,7 @@ const Modal = ({
         )
         );
       }
+
       if (dodaimang == 0) {
         // setIdbn()
         setName("")
@@ -551,23 +556,23 @@ const Modal = ({
                     onChange={handlechange}
                   // ref={inputRef}
                   ></input>
-                  <div className=" a">
-                    {benhnhan.length != 1
-                      ? benhnhan.map((thongtinbenhnhans) => (
-                        <div
-                          key={thongtinbenhnhans.id}
-                          // number a ={ thongtinbenhnhans.id}
-                          className="aâ h-5 w-80 cursor-pointer pl-1"
-                          onClick={(_e) => handleSetTT(thongtinbenhnhans.id)}
-                        // onChange={handlechange}
-                        >
-                          {thongtinbenhnhans.Ho} {thongtinbenhnhans.Ten} (
-                          {thongtinbenhnhans.id})
-                        </div>
-                      ))
-                      : null}
-
-
+                  <div className=" a" >
+                  {
+                      dodaimang > 1
+                        ? benhnhan.map((thongtinbenhnhans) => (
+                          <div
+                            key={thongtinbenhnhans.id}
+                            // number a ={ thongtinbenhnhans.id}
+                            className="aâ h-5 w-80 cursor-pointer pl-1"
+                            onClick={(_e) => handleSetTT(thongtinbenhnhans.id)}
+                          // onChange={handlechange}
+                          >
+                            {thongtinbenhnhans.Ho} {thongtinbenhnhans.Ten} (
+                            {thongtinbenhnhans.id})
+                          </div>
+                        ))
+                        : null           
+                    }
                   </div>
                 </div>
               </div>
@@ -606,7 +611,8 @@ const Modal = ({
                     data-mask=""
                     im-insert="false"
                     value={Ngaysinh}
-                    onChange={(e) => setNgaysinh(e.target.value)}
+                    // onChange={(Ngaysinh: Date) => handleOnchangeDate((Ngaysinh))}
+                    onChange={(event) => setNgaysinh(event.target.value)}
 
                   ></input>
 
@@ -829,7 +835,7 @@ const Modal = ({
   if (isBrowser) {
     return ReactDOM.createPortal(
       modalContent,
-      document.getElementById("modal-root")
+      document.getElementById('modal-root')
     );
   } else {
     return null;
